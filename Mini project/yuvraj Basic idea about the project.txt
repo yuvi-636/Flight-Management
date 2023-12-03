@@ -1,0 +1,340 @@
+Enter password: **********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 6
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> Create database Yuvraj;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use Yuvraj;
+Database changed
+mysql> CREATE TABLE booking_agents (
+    ->   agent_id INT PRIMARY KEY,
+    ->   agent_name VARCHAR(50),
+    ->   agent_email VARCHAR(100),
+    ->   agent_phone VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE airports (
+    ->   airport_id INT PRIMARY KEY,
+    ->   airport_name VARCHAR(50),
+    ->   airport_city VARCHAR(50),
+    ->   airport_country VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE passengers (
+    ->   passenger_id INT PRIMARY KEY,
+    ->   passenger_name VARCHAR(50),
+    ->   passenger_email VARCHAR(100),
+    ->   passenger_phone VARCHAR(20),
+    ->   passenger_address VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE flight_schedule (
+    ->   schedule_id INT PRIMARY KEY,
+    ->   flight_id INT,
+    ->   departure_date DATE,
+    ->   departure_time TIME,
+    ->   arrival_date DATE,
+    ->   arrival_time TIME,
+    ->   source_airport_id INT,
+    ->   destination_airport_id INT,
+    ->   FOREIGN KEY (flight_id) REFERENCES flights(flight_id),
+    ->   FOREIGN KEY (source_airport_id) REFERENCES airports(airport_id),
+    ->   FOREIGN KEY (destination_airport_id) REFERENCES airports(airport_id)
+    -> );
+ERROR 1005 (HY000): Can't create table 'yuvraj.flight_schedule' (errno: 150)
+mysql> CREATE TABLE payments (
+    ->   payment_id INT PRIMARY KEY,
+    ->   passenger_id INT,
+    ->   schedule_id INT,
+    ->   payment_amount DECIMAL(10, 2),
+    ->   payment_date DATE,
+    ->   FOREIGN KEY (passenger_id) REFERENCES passengers(passenger_id),
+
+    ->   FOREIGN KEY (schedule_id) REFERENCES flight_schedule(schedule_id)
+    -> );
+ERROR 1005 (HY000): Can't create table 'yuvraj.payments' (errno: 150)
+mysql> Drop database Yuvraj;
+Query OK, 3 rows affected (0.01 sec)
+
+mysql> Create database Yuvraj;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CREATE TABLE booking_agents (
+    ->   agent_id INT PRIMARY KEY,
+    ->   agent_name VARCHAR(50),
+    ->   agent_email VARCHAR(100),
+    ->   agent_phone VARCHAR(20)
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql>
+mysql> use Yuvraj;
+Database changed
+mysql> CREATE TABLE booking_agents (
+    ->   agent_id INT PRIMARY KEY,
+    ->   agent_name VARCHAR(50),
+    ->   agent_email VARCHAR(100),
+    ->   agent_phone VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE airports (
+    ->   airport_id INT PRIMARY KEY,
+    ->   airport_name VARCHAR(100),
+    ->   airport_city VARCHAR(50),
+    ->   airport_country VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE TABLE passengers (
+    ->   passenger_id INT PRIMARY KEY,
+    ->   passenger_name VARCHAR(50),
+    ->   passenger_email VARCHAR(100),
+    ->   passenger_phone VARCHAR(20),
+    ->   passenger_address VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE flight_schedule (
+    ->   schedule_id INT PRIMARY KEY,
+    ->   flight_id INT,
+    ->   departure_date DATE,
+    ->   departure_time TIME,
+    ->   arrival_date DATE,
+    ->   arrival_time TIME,
+    ->   source_airport_id INT,
+    ->   destination_airport_id INT,
+    ->   FOREIGN KEY (source_airport_id) REFERENCES airports(airport_id),
+    ->   FOREIGN KEY (destination_airport_id) REFERENCES airports(airport_id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE payments (
+    ->   payment_id INT PRIMARY KEY,
+    ->   passenger_id INT,
+    ->   schedule_id INT,
+    ->   payment_amount DECIMAL(10, 2),
+    ->   payment_date DATE,
+    ->   FOREIGN KEY (passenger_id) REFERENCES passengers(passenger_id),
+
+    ->   FOREIGN KEY (schedule_id) REFERENCES flight_schedule(schedule_id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE travel_class_capacity (
+    ->   class_id INT PRIMARY KEY,
+    ->   schedule_id INT,
+    ->   class_name VARCHAR(50),
+    ->   capacity INT,
+    ->   FOREIGN KEY (schedule_id) REFERENCES flight_schedule(schedule_id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE flight_coast (
+    ->   coast_id INT PRIMARY KEY,
+    ->   flight_id INT,
+    ->   class_id INT,
+    ->   class_cost DECIMAL(10, 2),
+    ->   availability BOOLEAN,
+    ->   FOREIGN KEY (flight_id) REFERENCES flight_schedule(flight_id),
+    ->   FOREIGN KEY (class_id) REFERENCES travel_class_capacity(class_id)
+    -> );
+ERROR 1005 (HY000): Can't create table 'yuvraj.flight_coast' (errno: 150)
+mysql> CREATE TABLE flight_coast (
+    ->   coast_id_pk INT PRIMARY KEY,
+    ->   flight_id INT,
+    ->   class_id INT,
+    ->   class_cost DECIMAL(10, 2),
+    ->   availability BOOLEAN,
+    ->   FOREIGN KEY (flight_id) REFERENCES flight_schedule(flight_id),
+    ->   FOREIGN KEY (class_id) REFERENCES travel_class_capacity(class_id)
+    -> );
+ERROR 1005 (HY000): Can't create table 'yuvraj.flight_coast' (errno: 150)
+mysql> CREATE TABLE flight_coast (
+    ->   coast_id INT PRIMARY KEY,
+    ->   flight_id INT,
+    ->   class_id INT,
+    ->   class_cost DECIMAL(10, 2),
+    ->   availability BOOLEAN,
+    ->   FOREIGN KEY (flight_id) REFERENCES flight_schedule(flight_id),
+    ->   FOREIGN KEY (class_id) REFERENCES travel_class_capacity(class_id)
+    -> );
+ERROR 1005 (HY000): Can't create table 'yuvraj.flight_coast' (errno: 150)
+mysql> CREATE TABLE flight_coast (
+    ->   coast_id INT PRIMARY KEY,
+    ->   flight_id INT,
+    ->   class_id INT,
+    ->   class_cost DECIMAL(10, 2),
+    ->   availability BOOLEAN,
+    ->   FOREIGN KEY (flight_id) REFERENCES flight_schedule(flight_id),
+    ->   FOREIGN KEY (class_id) REFERENCES travel_class_capacity(class_id)
+    ->
+    ->
+    ->
+    -> CREATE TABLE flight_coast (
+    ->   coast_id INT PRIMARY KEY,
+    ->   flight_id INT,
+    ->   class_id INT,
+    ->   class_cost DECIMAL(10, 2),
+    ->   availability BOOLEAN,
+    ->   FOREIGN KEY (flight_id) REFERENCES flight_schedule(flight_id),
+    ->   FOREIGN KEY (class_id) REFERENCES travel_class_capacity(class_id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CREATE TABLE flight_coast (
+  coast_id INT PRIMARY KEY,
+  flight_id INT,
+  class' at line 12
+mysql> CREATE TABLE flight_coast(
+    -> coast_id int PRIMARY KEY,
+    -> flight_id int PRIMARY KEY,
+    -> Class_id int PRIMARY KEY,
+    -> class_cost DECIMAL(10, 2),
+    -> availability BOOLEAN,
+    ->  FOREIGN KEY (flight_id) REFERENCES flight_schedule(flight_id),
+    ->  FOREIGN KEY (class_id) REFERENCES travel_class_capacity(class_id)
+    -> );
+ERROR 1068 (42000): Multiple primary key defined
+mysql>
+mysql> CREATE TABLE flight_coast (
+    ->   coast_id INT PRIMARY KEY,
+    ->   flight_id INT,
+    ->   class_id INT,
+    ->   class_cost DECIMAL(10, 2),
+    ->   availability BOOLEAN,
+    ->   FOREIGN KEY (flight_id) REFERENCES flight_schedule(flight_id),
+    ->   FOREIGN KEY (class_id) REFERENCES travel_class_capacity(class_id)
+    -> );
+ERROR 1005 (HY000): Can't create table 'yuvraj.flight_coast' (errno: 150)
+mysql> INSERT INTO booking_agents (agent_id, agent_name, agent_email, agent_phone)
+    -> VALUES
+    -> (1,'Yuvraj Singh', '4NM21CM066@NMAMIT.IN', '12345678'),
+    -> (2,'Satyam Ashish','4NM21CM047@NMAMIT.IN', '9876543210');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO airports (airport_id, airport_name, airport_city, airport_country)
+    -> VALUES
+    ->  (1, 'Airport A', 'City A', 'Country A'),
+    ->   (2, 'Airport B', 'City B', 'Country B');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO passengers (passenger_id, passenger_name, passenger_email, passenger_phone, passenger_address)
+    -> VALUES
+    -> (1,'Vijeth Ranade', '4NM21CM064@NMAMIT.IN','9878987867','Adress 1
+'),
+    -> (2,'Hemraj', 4NM21CM022@NMAMIT.IN','7849547937','Address 2');
+    '>  (2,'Hemraj', '4NM21CM022@NMAMIT.IN','7849547937','Address 2');
+    '>
+    '>  (2,'Hemraj', 4NM21CM022@NMAMIT.IN','7849547937','Address 2');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@NMAMIT.IN','7849547937','Address 2');
+ (2,'Hemraj', '4NM21CM022@NMAMIT.IN','784' at line 4
+mysql>  (1,'Vijeth Ranade', '4NM21CM064@NMAMIT.IN','9878987867','Adress 1
+    '> '),
+    -> (2,'Hemraj','4NM21CM022@NMAMIT.IN','9898989898','Address 2');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'Vijeth Ranade', '4NM21CM064@NMAMIT.IN','9878987867','Adress 1
+'),
+(2,'Hemraj'' at line 1
+mysql> INSERT INTO passengers (passenger_id, passenger_name, passenger_email, passenger_phone, passenger_address)
+    -> VALUES
+    ->   (1, 'Alice Johnson', 'alicejohnson@example.com', '1111111111', 'Address 1'),
+    ->   (2, 'Bob Smith', 'bobsmith@example.com', '2222222222', 'Address 2');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO flight_schedule (schedule_id, flight_id, departure_date, departure_time, arrival_date, arrival_time, source_airport_id, destination_airport_id)
+    -> VALUES
+    ->   (1, 101, '2023-06-26', '09:00:00', '2023-06-26', '12:00:00', 1, 2),
+    ->   (2, 102, '2023-06-27', '14:00:00', '2023-06-27', '17:00:00', 2, 1);
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO payments (payment_id, passenger_id, schedule_id, payment_amount, payment_date)
+    -> VALUES
+    ->   (1, 1, 1, 100.00, '2023-06-26'),
+    ->   (2, 2, 2, 150.00, '2023-06-27');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO travel_class_capacity (class_id, schedule_id, class_name, capacity)
+    -> VALUES
+    ->   (1, 1, 'Economy', 150),
+    ->   (2, 1, 'Business', 30),
+    ->   (3, 2, 'Economy', 120),
+    ->   (4, 2, 'Business', 20);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO flight_coast (coast_id, flight_id, class_id, class_cost, availability)
+    -> VALUES
+    ->   (1, 101, 1, 100.00, true),
+    ->   (2, 101, 2, 150.00, true),
+    ->   (3, 102, 3, 120.00, true),
+    ->   (4, 102, 4, 200.00, true);
+ERROR 1146 (42S02): Table 'yuvraj.flight_coast' doesn't exist
+mysql> CREATE TABLE flight_coast(
+    -> coast_id int primary key,
+    ->  flight_id INT,
+    ->   class_id INT,
+    ->   class_cost DECIMAL(10, 2),
+    ->   availability BOOLEAN,
+    ->   FOREIGN KEY (flight_id) REFERENCES flight_schedule(flight_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7
+mysql> /* Retrieving booking_agents */
+mysql> SELECT * FROM booking_agents;
++----------+---------------+----------------------+-------------+
+| agent_id | agent_name    | agent_email          | agent_phone |
++----------+---------------+----------------------+-------------+
+|        1 | Yuvraj Singh  | 4NM21CM066@NMAMIT.IN | 12345678    |
+|        2 | Satyam Ashish | 4NM21CM047@NMAMIT.IN | 9876543210  |
++----------+---------------+----------------------+-------------+
+2 rows in set (0.01 sec)
+
+mysql> /* Retrieving Airport in a specific country */
+mysql> SELECT * FROM airports WHERE airport_country = 'Country A';
++------------+--------------+--------------+-----------------+
+| airport_id | airport_name | airport_city | airport_country |
++------------+--------------+--------------+-----------------+
+|          1 | Airport A    | City A       | Country A       |
++------------+--------------+--------------+-----------------+
+1 row in set (0.01 sec)
+
+mysql>  /* Retrieve passengers with their corresponding payment details:
+*/
+mysql> SELECT passengers.passenger_name, payments.payment_amount
+    -> FROM passengers
+    -> INNER JOIN payments ON passengers.passenger_id = payments.passenger_id;
++----------------+----------------+
+| passenger_name | payment_amount |
++----------------+----------------+
+| Alice Johnson  |         100.00 |
+| Bob Smith      |         150.00 |
++----------------+----------------+
+2 rows in set (0.01 sec)
+
+mysql> /* Retrieve flight schedules with their corresponding departure and destination airport names: */
+mysql> SELECT fs.schedule_id, fs.departure_date, fs.departure_time, a1.airport_name AS source_airport, a2.airport_name AS destination_airport
+    -> FROM flight_schedule fs
+    -> JOIN airports a1 ON fs.source_airport_id = a1.airport_id
+    -> JOIN airports a2 ON fs.destination_airport_id = a2.airport_id;
++-------------+----------------+----------------+----------------+---------------------+
+| schedule_id | departure_date | departure_time | source_airport | destination_airport |
++-------------+----------------+----------------+----------------+---------------------+
+|           2 | 2023-06-27     | 14:00:00       | Airport B      | Airport A           |
+|           1 | 2023-06-26     | 09:00:00       | Airport A      | Airport B           |
++-------------+----------------+----------------+----------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql>

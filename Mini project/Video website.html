@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flight Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    #video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1 {
+      color: #333;
+      background-color: #83ff07;
+      padding: 10px;
+      z-index: 1;
+    }
+
+    h2 {
+      color: #666;
+      background-color: #f9f9f9;
+      padding: 8px;
+      margin-top: 20px;
+      z-index: 1;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: inline-block;
+      width: 80px;
+    }
+
+    input[type="text"] {
+      width: 200px;
+      padding: 5px;
+    }
+
+    button[type="submit"] {
+      padding: 5px 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    a {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 3px;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop id="video-background">
+    <source src="E:\project\Mini project\Flight Animation yuvraj - Made with Clipchamp.mp4" type="video/mp4">
+    <!-- Replace the above video URL with your actual video URL -->
+  </video>
+  <div style="position: relative; z-index: 2;">
+    <h1>Flight Management</h1>
+  
+    <h2>Retrieve Booking Agents</h2>
+    <a href="/booking_agents">Retrieve Booking Agents</a>
+  
+    <h2>Retrieve Airports by Country</h2>
+    <form action="/airports" method="GET">
+      <label for="countryInput">Country:</label>
+      <input type="text" id="countryInput" name="countryInput" required>
+      <button type="submit">Retrieve Airports</button>
+    </form>
+  
+    <h2>source airport id</h2>
+  &nbsp &nbsp &nbsp  
+      <a href="/flight_schedules">source airport id</a>
+    <h2>Destination airport id</h2>
+     
+  &nbsp &nbsp &nbsp 
+      <a href="/flight_schedules">Destination airport id</a>
+    <h2>Retrieve Flight Schedules with Airports</h2>
+    
+  &nbsp &nbsp &nbsp 
+      <a href="/flight_schedules">Retrieve Flight Schedules with Airports</a>
+    
+    <!-- New section -->
+    
+    <h2>For Further Help</h2>
+    <p>If you need further assistance, please visit our <a href="https://Flight_booking.com/help">Help Page</a>.</p>
+    <p>Contact-9468175914 </p>
+  </body>
+  </html>
+  
