@@ -1,36 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flight Management</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
+      background-color: #f0f0f0; /* Set a background color */
+    }
+
+    nav {
+      background-color: #333; /* Style the navigation bar */
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      display: inline-block;
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
     }
 
     #video-background {
-      position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: cover;
+      border: 5px solid #fff; /* Add a border to the video */
     }
 
-    h1 {
+    h1, h2 {
       color: #333;
       background-color: #83ff07;
       padding: 10px;
-      z-index: 1;
-    }
-
-    h2 {
-      color: #310707;
-      background-color: #f9f9f9;
-      padding: 8px;
       margin-top: 20px;
-      z-index: 1;
     }
 
     form {
@@ -71,44 +77,45 @@
   </style>
 </head>
 <body>
-  <video autoplay muted loop id="video-background">
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/booking_agents">Booking Agents</a>
+    <a href="/airports">Retrieve Airports</a>
+    <a href="/flight_schedules">Airport Names</a>
+    <a href="/Seat Availability">Seat Availability</a>
+    <a href="/flight_schedules">Flight Schedule</a>
+    <a href="E:\project\Mini project\CONTACT2.html">Contact</a>
+  </nav>
+
+  <video controls autoplay muted loop id="video-background">
     <source src="E:\project\Mini project\Flight Animation yuvraj - Made with Clipchamp.mp4" type="video/mp4">
-   
   </video>
+
   <div style="position: relative; z-index: 2;">
     <h1>Flight Management</h1>
-  
+
     <h2>Retrieve Booking Agents</h2>
     <a href="/booking_agents">Booking Agents</a>
-  
+
     <h2>Retrieve Airports by Country</h2>
     <form action="/airports" method="GET">
       <label for="countryInput">Country:</label>
       <input type="text" id="countryInput" name="countryInput" required>
       <button type="submit">Retrieve Airports</button>
     </form>
-  
+
     <h2>Source & Destiantion Airport Name</h2>
-  &nbsp &nbsp &nbsp  
-      <a href="/flight_schedules">Airport Names</a>
-   
-    <h2>Retrieve Flight as per price</h2>   
-  &nbsp &nbsp &nbsp 
+    <a href="/flight_schedules">Airport Names</a>
 
-      <a href="/Seat Availability">Seat Availability as per price</a>
-    
+    <h2>Retrieve Flight as per price</h2>
+    <a href="/Seat Availability">Seat Availability as per price</a>
 
-   
-    
-  &nbsp &nbsp &nbsp 
-      <h2>Date and Time</h2>
-      <a href="/flight_schedules">Flight Schedule </a>
-     
-    
-    
+    <h2>Date and Time</h2>
+    <a href="/flight_schedules">Flight Schedule</a>
+
     <h2>For Further Help</h2>
-    <a href="E:\project\Mini project\CONTACT2.html">CONTACT</a>.</p>
-    
-  </body>
-  </html>
-  
+    <a href="E:\project\Mini project\CONTACT2.html">CONTACT</a>
+  </div>
+</body>
+</html>
